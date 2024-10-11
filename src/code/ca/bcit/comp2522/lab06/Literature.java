@@ -5,6 +5,4 @@ package ca.bcit.comp2522.lab06;
 public abstract class Literature
 {
     public abstract String getTitle();
-    public abstract String getAuthor();
-    public abstract int getYearPublished();
 }

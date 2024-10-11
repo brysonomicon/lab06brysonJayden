@@ -19,13 +19,10 @@ import java.util.Iterator;
  *
  * @version 1.0
  */
-public class BookStore
+public class BookStore<T extends Literature>
 {
-    private static final int ROUND_LOWER_BOUND    = 10;
-    private static final int ROUND_UPPER_BOUND    = 9;
-    private static final int PERCENTAGE_CONVERTOR = 100;
+    private final String storeName;
 
-    private final String             storeName;
 
     /**
      * Constructs a {@code BookStore} with the given store name.
@@ -87,12 +84,6 @@ public class BookStore
     }
 
     /**
-     * Prints all the novels published in a decade determined by the passed int parameter.
-     * Takes a given decade parameter and rounds it down to the nearest {@value ROUND_LOWER_BOUND} to determine
-     * the lower bound of the decade. Then adds {@value ROUND_UPPER_BOUND}
-     *
-     * @param decade a year that falls in the desired decade
-     *
      * TODO implement lambda expressions for search/matching
      */
     public void printGroupByDecade(final int decade)
