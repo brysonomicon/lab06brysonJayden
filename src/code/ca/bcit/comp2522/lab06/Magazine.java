@@ -7,7 +7,7 @@ public class Magazine
         extends Literature
         implements Listable<Magazine>
 {
-    private static final String[] TITLES = {
+    public static final String[] TITLES = {
             "Time", "National Geographic", "The New Yorker", "Vogue",
             "Forbes", "Sports Illustrated", "Rolling Stone", "Scientific American",
             "The Atlantic", "Harper's Bazaar", "Wired", "GQ",
@@ -27,25 +27,6 @@ public class Magazine
     public Magazine(final String title)
     {
         this.title = title;
-    }
-
-    @Override
-    public List<Magazine> createList()
-    {
-        final List<Magazine> magazines;
-
-        magazines = new ArrayList<>();
-
-        for(String title : TITLES)
-        {
-            final Magazine magazine;
-
-            magazine = new Magazine(title);
-
-            magazines.add(magazine);
-        }
-
-        return magazines;
     }
 
     @Override

@@ -1,13 +1,6 @@
 package ca.bcit.comp2522.lab06;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Iterator;
-
 
 /**
  * The {@code BookStore} class represents a store containing a collection of novels.
@@ -22,7 +15,6 @@ import java.util.Iterator;
 public class BookStore<T extends Literature>
 {
     private final String storeName;
-
 
     /**
      * Constructs a {@code BookStore} with the given store name.
@@ -156,53 +148,52 @@ public class BookStore<T extends Literature>
         return null;
     }
 
-    /**
-     * Main method to test the functionality of the {@code BookStore} class.
-     *
-     * @param args command line arguments
-     */
-    public static void main(String[] args)
-    {
-        BookStore         store;
-        String            storeName;
-        final Novel       oldest;
-        final List<Novel> fifteenCharTitles;
-
-        store     = new BookStore("Books and Books and Books");
-        storeName = store.getStoreName();
-        System.out.printf("Welcome to %s\n", storeName);
-
-        System.out.println("Print all of the book titles in UPPERCASE");
-        store.printAllTitles();
-
-        System.out.println("\nBook Titles containing \"The\"");
-        store.printBookTitle("The");
-
-        System.out.println("\nAll Titles in Alphabetical Order");
-        store.printTitlesInAlphaOrder();
-
-        System.out.println("\nBooks from the 2000s");
-        store.printGroupByDecade(2000);
-
-        System.out.println("\nLongest Book Title");
-        store.printLongest();
-
-        System.out.println("\nReturns if there is a book written in 1950?");
-        System.out.println(store.isThereABookWrittenIn(1950));
-
-        System.out.println("\nHow many books contain heart?");
-        System.out.println(store.howManyBooksContain("heart"));
-
-        System.out.println("\nPercentage of books written between 1940 and 1950:");
-        System.out.println(store.whichPercentWrittenBetween(1940, 1950) + "%");
-
-        System.out.println("\nOldest Book Title");
-        oldest = store.getOldestBook();
-        System.out.println(oldest);
-
-        System.out.println("\nNovels with 15 characters");
-        fifteenCharTitles = store.getBooksThisLength(15);
+//    /**
+//     * Main method to test the functionality of the {@code BookStore} class.
+//     *
+//     * @param args command line arguments
+//     */
+//    public static void main(String[] args)
+//    {
+//        BookStore         store;
+//        String            storeName;
+//        final Novel       oldest;
+//        final List<Novel> fifteenCharTitles;
+//
+//        store     = new BookStore("Books and Books and Books");
+//        storeName = store.getStoreName();
+//        System.out.printf("Welcome to %s\n", storeName);
+//
+//        System.out.println("Print all of the book titles in UPPERCASE");
+//        store.printAllTitles();
+//
+//        System.out.println("\nBook Titles containing \"The\"");
+//        store.printBookTitle("The");
+//
+//        System.out.println("\nAll Titles in Alphabetical Order");
+//        store.printTitlesInAlphaOrder();
+//
+//        System.out.println("\nBooks from the 2000s");
+//        store.printGroupByDecade(2000);
+//
+//        System.out.println("\nLongest Book Title");
+//        store.printLongest();
+//
+//        System.out.println("\nReturns if there is a book written in 1950?");
+//        System.out.println(store.isThereABookWrittenIn(1950));
+//
+//        System.out.println("\nHow many books contain heart?");
+//        System.out.println(store.howManyBooksContain("heart"));
+//
+//        System.out.println("\nPercentage of books written between 1940 and 1950:");
+//        System.out.println(store.whichPercentWrittenBetween(1940, 1950) + "%");
+//
+//        System.out.println("\nOldest Book Title");
+//        oldest = store.getOldestBook();
+//        System.out.println(oldest);
+//
+//        System.out.println("\nNovels with 15 characters");
+//        fifteenCharTitles = store.getBooksThisLength(15);
 //        fifteenCharTitles.forEach(novels -> System.out.println(novels.getTitle()));
-
-    }
+//    }
 }

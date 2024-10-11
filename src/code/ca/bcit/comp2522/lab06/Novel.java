@@ -7,7 +7,7 @@ public class Novel
         extends Literature
         implements Listable<Novel>
 {
-    private static final String[] TITLES = {
+    public static final String[] TITLES = {
             "The Adventures of Augie March", "All the King's Men", "American Pastoral",
             "An American Tragedy", "Animal Farm", "Appointment in Samarra",
             "Are You There God? It's Me Margaret.", "The Assistant", "At Swim-Two-Birds",
@@ -44,25 +44,6 @@ public class Novel
     public Novel(final String title)
     {
         this.title = title;
-    }
-
-    @Override
-    public List<Novel> createList()
-    {
-        final List<Novel> novels;
-
-        novels = new ArrayList<>();
-
-        for(String title : TITLES)
-        {
-            Novel novel;
-
-            novel = new Novel(title);
-
-            novels.add(novel);
-        }
-
-        return novels;
     }
 
     @Override

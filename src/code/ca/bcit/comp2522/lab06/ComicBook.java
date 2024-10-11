@@ -7,7 +7,7 @@ public class ComicBook
         extends Literature
         implements Listable<ComicBook>
 {
-    private static final String[] TITLES = {
+    public static final String[] TITLES = {
             "Watchmen", "The Dark Knight Returns", "Maus", "V for Vendetta",
             "The Sandman", "Y: The Last Man", "Persepolis", "Batman: Year One",
             "Bone", "Black Panther", "Hellboy: Seed of Destruction",
@@ -29,25 +29,6 @@ public class ComicBook
     public ComicBook(final String title)
     {
         this.title = title;
-    }
-
-    @Override
-    public List<ComicBook> createList()
-    {
-        final List<ComicBook> comicBooks;
-
-        comicBooks = new ArrayList<>();
-
-        for(String title : TITLES)
-        {
-            final ComicBook comicBook;
-
-            comicBook = new ComicBook(title);
-
-            comicBooks.add(comicBook);
-        }
-
-        return comicBooks;
     }
 
     @Override
