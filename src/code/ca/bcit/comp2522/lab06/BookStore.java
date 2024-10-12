@@ -31,9 +31,12 @@ public class BookStore<T extends Literature>
         validateName(storeName);
 
         this.storeName = storeName;
-        this.bookList     = new ArrayList<T>();
+        this.bookList  = new ArrayList<T>();
     }
 
+    public List<T> getBookList() {
+        return bookList;
+    }
 
     /**
      * @author Jayden Hutchinson
@@ -41,16 +44,15 @@ public class BookStore<T extends Literature>
      *
      * @version 1.0
      */
-    public class BookStoreInfo
+    static class BookStoreInfo
     {
         /**
          *
          * @param storeName
-         * @param bookCount
          */
-        public void displayInfo(String storeName, int bookCount)
+        public static void displayInfo(String storeName)
         {
-            System.out.println("BookStore " + storeName + ", Books: " + bookCount);
+            System.out.println("BookStore " + storeName + ", Books: ");
         }
     }
 
@@ -61,7 +63,7 @@ public class BookStore<T extends Literature>
      *
      * @version 1.0
      */
-    public class NovelStatistics
+    class NovelStatistics
     {
         /**
          *
@@ -114,13 +116,6 @@ public class BookStore<T extends Literature>
     }
 
     /**
-     * TODO use lambda expression instead of for each loop
-     */
-    public void printAllTitles()
-    {
-    }
-
-    /**
      * TODO use lambda expression to perform title match
      * bookList.forEach(item -> {}
      * like a callback function in javascript almost
@@ -133,10 +128,6 @@ public class BookStore<T extends Literature>
                 System.out.println(book);
             }
         });
-    }
-
-    public List<T> getBookList() {
-        return bookList;
     }
 
     /**
