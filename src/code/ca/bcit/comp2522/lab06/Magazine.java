@@ -3,6 +3,12 @@ package ca.bcit.comp2522.lab06;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Jayden Hutchinson
+ * @author Bryson Lindy
+ *
+ * @version 1.0
+ */
 public class Magazine
         extends Literature
         implements Listable<Magazine>
@@ -33,5 +39,11 @@ public class Magazine
     public String getTitle()
     {
         return this.title;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.getClass().getSimpleName() + ": " + title;
     }
 }

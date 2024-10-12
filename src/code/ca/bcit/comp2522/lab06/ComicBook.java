@@ -3,6 +3,12 @@ package ca.bcit.comp2522.lab06;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Jayden Hutchinson
+ * @author Bryson Lindy
+ *
+ * @version 1.0
+ */
 public class ComicBook
         extends Literature
         implements Listable<ComicBook>
@@ -36,4 +42,9 @@ public class ComicBook
         return this.title;
     }
 
+    @Override
+    public String toString()
+    {
+        return this.getClass().getSimpleName() + ": " + this.getTitle();
+    }
 }

@@ -1,5 +1,7 @@
 package ca.bcit.comp2522.lab06;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -9,12 +11,14 @@ import java.util.List;
  * @author Bryson Lindy
  * @author Richard Ho
  * @author Phyo Thu Kha
+ * @author Jayden Hutchinson
  *
  * @version 1.0
  */
 public class BookStore<T extends Literature>
 {
     private final String storeName;
+    private List<T> bookList;
 
     /**
      * Constructs a {@code BookStore} with the given store name.
@@ -27,6 +31,63 @@ public class BookStore<T extends Literature>
         validateName(storeName);
 
         this.storeName = storeName;
+        this.bookList     = new ArrayList<T>();
+    }
+
+
+    /**
+     * @author Jayden Hutchinson
+     * @author Bryson Lindy
+     *
+     * @version 1.0
+     */
+    public class BookStoreInfo
+    {
+        /**
+         *
+         * @param storeName
+         * @param bookCount
+         */
+        public void displayInfo(String storeName, int bookCount)
+        {
+            System.out.println("BookStore " + storeName + ", Books: " + bookCount);
+        }
+    }
+
+
+    /**
+     * @author Jayden Hutchinson
+     * @author Bryson Lindy
+     *
+     * @version 1.0
+     */
+    public class NovelStatistics
+    {
+        /**
+         *
+         * @return
+         */
+        public double averageTitleLength() {
+            int totalLength = 0;
+            for (T book:bookList) {
+                totalLength += book.getTitle().length();
+            }
+            return totalLength / bookList.size();
+        }
+    }
+
+
+    public void addItem(final T item)
+    {
+        bookList.add(item);
+    }
+
+    /**
+     *
+     */
+    public void printItems()
+    {
+        bookList.forEach(System.out::println);
     }
 
     /**
@@ -61,11 +122,21 @@ public class BookStore<T extends Literature>
 
     /**
      * TODO use lambda expression to perform title match
-     * items.forEach(item -> {}
+     * bookList.forEach(item -> {}
      * like a callback function in javascript almost
      */
     public void printBookTitle(final String title)
     {
+        bookList.forEach(book -> {
+            if(book.getTitle().contains(title))
+            {
+                System.out.println(book);
+            }
+        });
+    }
+
+    public List<T> getBookList() {
+        return bookList;
     }
 
     /**
@@ -73,6 +144,8 @@ public class BookStore<T extends Literature>
      */
     public void printTitlesInAlphaOrder()
     {
+        bookList.sort(Comparator.comparing(Literature::getTitle, String.CASE_INSENSITIVE_ORDER));
+        bookList.forEach(System.out::println);
     }
 
     /**

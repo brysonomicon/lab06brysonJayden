@@ -3,6 +3,12 @@ package ca.bcit.comp2522.lab06;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Jayden Hutchinson
+ * @author Bryson Lindy
+ *
+ * @version 1.0
+ */
 public class Novel
         extends Literature
         implements Listable<Novel>
@@ -55,6 +61,6 @@ public class Novel
     @Override
     public String toString()
     {
-        return this.title;
+        return this.getClass().getSimpleName() + ": " + this.title;
     }
 }
