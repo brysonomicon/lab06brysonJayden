@@ -25,7 +25,6 @@ public class ComicBook
 
     private String title;
 
-
     public ComicBook(final String title)
     {
         this.title = title;

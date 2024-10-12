@@ -10,10 +10,12 @@ public class Main
         List<Novel> novels;
         List<ComicBook> comics;
         List<Magazine> magazines;
+        List<Literature> literatures;
 
         store     = new BookStore<>("Pages Through The Ages");
         novels    = Listable.createList(Novel.TITLES, Novel::new);
         comics    = Listable.createList(ComicBook.TITLES, ComicBook::new);
         magazines = Listable.createList(Magazine.TITLES, Magazine::new);
+
     }
 }
