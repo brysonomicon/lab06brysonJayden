@@ -1,7 +1,6 @@
 package ca.bcit.comp2522.lab06;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -9,33 +8,44 @@ import java.util.List;
  * It provides methods to search, sort, and print information about the novels.
  *
  * @author Bryson Lindy
- * @author Richard Ho
- * @author Phyo Thu Kha
  * @author Jayden Hutchinson
  *
- * @version 1.0
+ * @author Richard Ho
+ * @author Phyo Thu Kha
+ *
+ * @version 1.1
  */
-public class BookStore<T extends Literature>
+class BookStore<T extends Literature>
 {
-    private final String storeName;
-    private List<T> bookList;
+    private final String  storeName;
+    private final List<T> bookList;
 
     /**
      * Constructs a {@code BookStore} with the given store name.
-     * Initializes the list of novels using {@code Novel.createNovelList()}.
      *
      * @param storeName the name of the bookstore
      */
-    public BookStore(final String storeName)
+    BookStore(final String storeName)
     {
         validateName(storeName);
 
         this.storeName = storeName;
-        this.bookList  = new ArrayList<T>();
+        this.bookList  = new ArrayList<>();
     }
 
-    public List<T> getBookList() {
-        return bookList;
+    /*
+    Checks to make sure the store name is not null or empty.
+    */
+    private static void validateName(final String storeName)
+    {
+        final boolean storeNameIsEmpty;
+
+        storeNameIsEmpty = storeName.trim().isEmpty();
+
+        if(storeName == null || storeNameIsEmpty)
+        {
+            throw new IllegalArgumentException("Store name cannot be null or empty");
+        }
     }
 
     /**
@@ -44,18 +54,19 @@ public class BookStore<T extends Literature>
      *
      * @version 1.0
      */
-    static class BookStoreInfo
+    class BookStoreInfo
     {
         /**
-         *
-         * @param storeName
          */
-        public static void displayInfo(String storeName)
+        public void displayInfo()
         {
-            System.out.println("BookStore " + storeName + ", Books: ");
+            final int bookCount;
+
+            bookCount = bookList.size();
+
+            System.out.println(storeName + " has " + bookCount + " books");
         }
     }
-
 
     /**
      * @author Jayden Hutchinson
@@ -69,27 +80,35 @@ public class BookStore<T extends Literature>
          *
          * @return
          */
-        public double averageTitleLength() {
-            int totalLength = 0;
-            for (T book:bookList) {
-                totalLength += book.getTitle().length();
+        public double averageTitleLength()
+        {
+            final int listSize;
+            int       totalLength;
+
+            listSize    = bookList.size();
+            totalLength = 0;
+
+            for (T book : bookList)
+            {
+                final int bookTitleLength;
+
+                bookTitleLength = book.getTitle().length();
+
+                totalLength    += bookTitleLength;
             }
-            return totalLength / bookList.size();
+
+            return totalLength / (double)listSize;
         }
     }
 
-
-    public void addItem(final T item)
+    List<T> getBookList()
     {
-        bookList.add(item);
+        return this.bookList;
     }
 
-    /**
-     *
-     */
-    public void printItems()
+    int getNumOfBooks()
     {
-        bookList.forEach(System.out::println);
+        return this.bookList.size();
     }
 
     /**
@@ -97,22 +116,33 @@ public class BookStore<T extends Literature>
      *
      * @return the name of the bookstore
      */
-    public String getStoreName()
+    String getStoreName()
     {
-        return storeName;
+        return this.storeName;
     }
 
-    /*
-    Checks to make sure the store name is not null or empty.
-     */
-    private static void validateName(final String storeName)
+    void addItem(final T item)
     {
-        final boolean storeNameIsEmpty = storeName.trim().isEmpty();
+        bookList.add(item);
+    }
 
-        if(storeName == null || storeNameIsEmpty)
+    void addNovelsToCollection(final List<? super Novel> novelCollection)
+    {
+        for(T book : bookList)
         {
-            throw new IllegalArgumentException("Store name cannot be null or empty");
+            if(book instanceof Novel)
+            {
+                novelCollection.add((Novel)book);
+            }
         }
+    }
+
+    /**
+     *
+     */
+    void printItems()
+    {
+        bookList.forEach(System.out::println);
     }
 
     /**
@@ -120,10 +150,14 @@ public class BookStore<T extends Literature>
      * bookList.forEach(item -> {}
      * like a callback function in javascript almost
      */
-    public void printBookTitle(final String title)
+    void printBookTitle(final String title)
     {
         bookList.forEach(book -> {
-            if(book.getTitle().contains(title))
+            final String bookTitle;
+
+            bookTitle = book.getTitle();
+
+            if(bookTitle.contains(title))
             {
                 System.out.println(book);
             }
@@ -133,17 +167,24 @@ public class BookStore<T extends Literature>
     /**
      *  TODO use method reference to String::compareToIgnoreCase when sorting
      */
-    public void printTitlesInAlphaOrder()
+    void printTitlesInAlphaOrder()
     {
-        bookList.sort(Comparator.comparing(Literature::getTitle, String.CASE_INSENSITIVE_ORDER));
-        bookList.forEach(System.out::println);
-    }
+        final List<String> titles;
 
-    /**
-     * TODO implement lambda expressions for search/matching
-     */
-    public void printGroupByDecade(final int decade)
-    {
+        titles = new ArrayList<>();
+
+        for(T book : bookList)
+        {
+            final String bookTitle;
+
+            bookTitle = book.getTitle();
+
+            titles.add(bookTitle);
+        }
+
+        titles.sort(String::compareToIgnoreCase);
+        //titles.forEach(title -> System.out.println(title));
+        titles.forEach(System.out::println);
     }
 
     /**
@@ -152,18 +193,23 @@ public class BookStore<T extends Literature>
      */
     public void printLongest()
     {
-    }
+        String longestTitle;
 
-    /**
-     * Iterates through the book list to see if any were published in the year passed
-     * as a parameter. Returns true if one is found, false if not.
-     *
-     * @param year to check if
-     * @return boolean
-     */
-    public boolean isThereABookWrittenIn(final int year)
-    {
-        return false;
+        longestTitle = this.bookList.getFirst().getTitle();
+
+        for(T book : bookList)
+        {
+            final String bookTitle;
+
+            bookTitle = book.getTitle();
+
+            if(bookTitle.length() > longestTitle.length())
+            {
+                longestTitle = bookTitle;
+            }
+        }
+
+        System.out.println("The longest title in the list is:\n" + longestTitle);
     }
 
     /**
@@ -173,32 +219,25 @@ public class BookStore<T extends Literature>
      * @param word String to check if contained in each book title
      * @return number
      */
-    public int howManyBooksContain(final String word)
+    int howManyBooksContain(final String word)
     {
-        return 0;
-    }
+        int counter;
 
-    /**
-     * Returns a double value of the ratio of novels between the ranges passed as
-     * parameters and the total number of novels.
-     *
-     * @param lowerBound int that indicates the lower limit of years
-     * @param upperBound int that indicates the upper limit of years
-     * @return double representing the percentage of novels between the lower and upper bounds
-     */
-    public double whichPercentWrittenBetween(final int lowerBound,
-                                             final int upperBound)
-    {
-        return 0.0;
-    }
+        counter = 0;
 
-    /**
-     * Returns the oldest book from the book list.
-     * @return Book object that is oldest
-     */
-    public Novel getOldestBook()
-    {
-        return null;
+        for(T book : bookList)
+        {
+            final String bookTitle;
+
+            bookTitle = book.getTitle();
+
+            if(bookTitle.contains(word))
+            {
+                ++counter;
+            }
+        }
+
+        return counter;
     }
 
     /**
@@ -207,7 +246,7 @@ public class BookStore<T extends Literature>
      * @param length the desired title length
      * @return a list of novels with titles of the given length
      */
-    public List<Novel> getBooksThisLength(final int length)
+    List<Novel> getBooksThisLength(final int length)
     {
         return null;
     }

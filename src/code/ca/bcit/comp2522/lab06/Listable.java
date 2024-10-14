@@ -12,16 +12,16 @@ import java.util.function.Function;
  */
 public interface Listable <T extends Literature>
 {
-    static <T extends Literature> List<T> createList(final String[] titles,
-                                                     final Function<String, T> creator)
+    static <T extends Literature> List<T> createLiteratureList(final String[] titles,
+                                                               final Function<String, T> constructor)
     {
         List<T> list;
 
-        list = new ArrayList<T>();
+        list = new ArrayList<>();
 
         for(String title : titles)
         {
-            list.add(creator.apply(title));
+            list.add(constructor.apply(title));
         }
 
         return list;

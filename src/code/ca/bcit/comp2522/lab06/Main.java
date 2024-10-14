@@ -14,16 +14,21 @@ public class Main
     public static void main(String[] args)
     {
         final BookStore<Literature> jaysonBookStore;
-        final List<Novel> novelList;
-        final List<ComicBook> comicList;
-        final List<Magazine> magazineList;
-        final List<Literature> literatureList;
+        final List<Novel>           novelList;
+        final List<ComicBook>       comicList;
+        final List<Magazine>        magazineList;
+        final List<Literature>      literatureList;
 
-        jaysonBookStore = new BookStore<>("Pages Through The Ages");
+        final List<Novel>           testList;
 
-        novelList    = Listable.createList(Novel.TITLES, Novel::new);
-        comicList    = Listable.createList(ComicBook.TITLES, ComicBook::new);
-        magazineList = Listable.createList(Magazine.TITLES, Magazine::new);
+        jaysonBookStore = new BookStore<>("jayson Book Store: It's Jayden and Bryson, isn't it?");
+
+        novelList    = Listable.createLiteratureList(Novel.TITLES,
+                                                     Novel::new);
+        comicList    = Listable.createLiteratureList(ComicBook.TITLES,
+                                                     ComicBook::new);
+        magazineList = Listable.createLiteratureList(Magazine.TITLES,
+                                                     Magazine::new);
 
         literatureList = new ArrayList<>();
         literatureList.addAll(novelList);
@@ -32,14 +37,24 @@ public class Main
 
         literatureList.forEach(jaysonBookStore::addItem);
 
-        System.out.println("Print all items");
+        System.out.println("Print all items:");
         jaysonBookStore.printItems();
 
-        System.out.println("Print all items containing \"The\"");
+        System.out.println("\n\nPrint all items containing \"The\":");
         jaysonBookStore.printBookTitle("The");
 
-        System.out.println("SORTED");
+        System.out.println("\n\nPrint items in alphabetical order:");
         jaysonBookStore.printTitlesInAlphaOrder();
-        
+
+        System.out.println("\n\nPrint info about BookStore using nested class:");
+        jaysonBookStore.new BookStoreInfo().displayInfo();
+
+        System.out.println("\n\nAverage length of Novel titles:");
+        System.out.printf("%.2f letters", jaysonBookStore.new NovelStatistics().averageTitleLength());
+
+        System.out.println("\n\nAdd Novels from this BookStore to other Collection:");
+        testList = new ArrayList<>();
+        jaysonBookStore.addNovelsToCollection(testList);
+        testList.forEach(System.out::println);
     }
 }
