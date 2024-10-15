@@ -83,21 +83,18 @@ class BookStore<T extends Literature>
         public double averageTitleLength()
         {
             final int listSize;
-            int       totalLength;
+            int[]     totalLength = {0};
 
-            listSize    = bookList.size();
-            totalLength = 0;
+            listSize = bookList.size();
 
-            for (T book : bookList)
-            {
-                final int bookTitleLength;
+            bookList.forEach(book -> {
+                if(book instanceof Novel)
+                {
+                    totalLength[0] += book.getTitle().length();
+                }
+            });
 
-                bookTitleLength = book.getTitle().length();
-
-                totalLength    += bookTitleLength;
-            }
-
-            return totalLength / (double)listSize;
+            return totalLength[0] / (double)listSize;
         }
     }
 

@@ -62,5 +62,9 @@ public class Main
         testList = new ArrayList<>();
         jaysonBookStore.addNovelsToCollection(testList);
         testList.forEach(System.out::println);
+
+        System.out.println("\n\njaysonBookStore average Novel title length:");
+        final double titleLength = jaysonBookStore.new NovelStatistics().averageTitleLength();
+        System.out.printf("%.2f letters", titleLength);
     }
 }
