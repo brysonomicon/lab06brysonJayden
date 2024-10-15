@@ -10,20 +10,9 @@ import java.util.function.Function;
  *
  * @version 1.0
  */
+@FunctionalInterface
 public interface Listable <T extends Literature>
 {
-    static <T extends Literature> List<T> createLiteratureList(final String[] titles,
-                                                               final Function<String, T> constructor)
-    {
-        List<T> list;
+    List<T> createLiteratureList(final String[] titles, final Function<String, T> constructor);
 
-        list = new ArrayList<>();
-
-        for(String title : titles)
-        {
-            list.add(constructor.apply(title));
-        }
-
-        return list;
-    }
 }

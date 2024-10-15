@@ -17,10 +17,20 @@ public class Main
         final List<Literature>      literatureList;
         final List<List>            listList;
         final List<Novel>           testList;
+        final Listable<Literature>  listable;
 
         jaysonBookStore = new BookStore<>("jayson Book Store: It's Jayden and Bryson, isn't it?");
 
         listList = new ArrayList<>();
+        listable = (titles, constructor) -> {
+            List<Literature> list = new ArrayList<>();
+
+          for(String title : titles)
+          {
+              list.add(constructor.apply(title));
+          }
+          return list;
+        };
 
         /*
         * We use the illustrious Listable interface to create lists of titles for our Literature objects.
@@ -30,15 +40,12 @@ public class Main
         * what's really cool is that the compiler knows that we want to select the addAll function from the list
         * of functions so that we easily add each list from listList to literatureList a single line of list. I mean code.
         */
-        listList.add(Listable.createLiteratureList(Novel.TITLES, Novel::new));
-        listList.add(Listable.createLiteratureList(ComicBook.TITLES, ComicBook::new));
-        listList.add(Listable.createLiteratureList(Magazine.TITLES, Magazine::new));
+        listList.add(listable.createLiteratureList(Novel.TITLES, Novel::new));
+        listList.add(listable.createLiteratureList(ComicBook.TITLES, ComicBook::new));
+        listList.add(listable.createLiteratureList(Magazine.TITLES, Magazine::new));
 
         literatureList = new ArrayList<>();
 
-//        listList.forEach(list -> {
-//            literatureList.addAll(list);
-//        });
         listList.forEach(literatureList::addAll);
 
         literatureList.forEach(jaysonBookStore::addItem);
