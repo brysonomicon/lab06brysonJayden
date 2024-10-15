@@ -14,26 +14,32 @@ public class Main
     public static void main(String[] args)
     {
         final BookStore<Literature> jaysonBookStore;
-        final List<Novel>           novelList;
-        final List<ComicBook>       comicList;
-        final List<Magazine>        magazineList;
         final List<Literature>      literatureList;
-
+        final List<List>            listList;
         final List<Novel>           testList;
 
         jaysonBookStore = new BookStore<>("jayson Book Store: It's Jayden and Bryson, isn't it?");
 
-        novelList    = Listable.createLiteratureList(Novel.TITLES,
-                                                     Novel::new);
-        comicList    = Listable.createLiteratureList(ComicBook.TITLES,
-                                                     ComicBook::new);
-        magazineList = Listable.createLiteratureList(Magazine.TITLES,
-                                                     Magazine::new);
+        listList = new ArrayList<>();
+
+        /*
+        * We use the illustrious Listable interface to create lists of titles for our Literature objects.
+        * We add each list to a List of lists called listList. Then we initialist the List literatureList as
+        * an ArrayList and for each list in listList we add all list elements to the List literatureList.
+        *
+        * what's really cool is that the compiler knows that we want to select the addAll function from the list
+        * of functions so that we easily add each list from listList to literatureList a single line of list. I mean code.
+        */
+        listList.add(Listable.createLiteratureList(Novel.TITLES, Novel::new));
+        listList.add(Listable.createLiteratureList(ComicBook.TITLES, ComicBook::new));
+        listList.add(Listable.createLiteratureList(Magazine.TITLES, Magazine::new));
 
         literatureList = new ArrayList<>();
-        literatureList.addAll(novelList);
-        literatureList.addAll(comicList);
-        literatureList.addAll(magazineList);
+
+//        listList.forEach(list -> {
+//            literatureList.addAll(list);
+//        });
+        listList.forEach(literatureList::addAll);
 
         literatureList.forEach(jaysonBookStore::addItem);
 
