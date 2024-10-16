@@ -218,9 +218,7 @@ class BookStore<T extends Literature>
      */
     int howManyBooksContain(final String word)
     {
-        int counter;
-
-        counter = 0;
+        int counter = 0;
 
         for(T book : bookList)
         {
@@ -243,9 +241,24 @@ class BookStore<T extends Literature>
      * @param length the desired title length
      * @return a list of novels with titles of the given length
      */
-    List<Novel> getBooksThisLength(final int length)
+    List<Literature> getBooksThisLength(final int length)
     {
-        return null;
+        final List<Literature> litList;
+
+        litList = new ArrayList<>();
+
+        this.bookList.forEach(book -> {
+            final String bookTitle;
+
+            bookTitle = book.getTitle();
+
+            if(bookTitle.length() == length)
+            {
+                litList.add(book);
+            }
+        });
+
+        return litList;
     }
 
 }

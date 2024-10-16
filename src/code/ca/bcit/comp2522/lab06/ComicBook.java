@@ -8,7 +8,6 @@ package ca.bcit.comp2522.lab06;
  */
 public class ComicBook
         extends Literature
-        implements Listable<ComicBook>
 {
     public static final String[] TITLES = {
             "Watchmen", "The Dark Knight Returns", "Maus", "V for Vendetta",

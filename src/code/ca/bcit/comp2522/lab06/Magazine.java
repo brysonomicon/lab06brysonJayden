@@ -8,7 +8,6 @@ package ca.bcit.comp2522.lab06;
  */
 public class Magazine
         extends Literature
-        implements Listable<Magazine>
 {
     public static final String[] TITLES = {
             "Time", "National Geographic", "The New Yorker", "Vogue",
