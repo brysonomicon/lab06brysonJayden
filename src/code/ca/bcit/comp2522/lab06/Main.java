@@ -2,7 +2,6 @@ package ca.bcit.comp2522.lab06;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * @author Jayden Hutchinson
@@ -20,7 +19,9 @@ public class Main
         final List< List >                            listList;
         final List< Novel >                           testList;
         final Listable< Literature >                  listable;
+        final List< Literature >                      listOfBooksOfLength;
         final double                                  averageTitleLength;
+        final int                                     numOfBookContaining;
 
 
         jaysonBookStore = new BookStore<>( "jayson Book Store: It's Jayden and Bryson, isn't it?" );
@@ -28,7 +29,7 @@ public class Main
         listList = new ArrayList<>();
         listable = (titles, constructor) ->
         {
-            List< Literature > list;
+            final List< Literature > list;
             list = new ArrayList<>();
 
             for( String title : titles )
@@ -38,15 +39,7 @@ public class Main
             return list;
         };
 
-        /*
-         * We use the illustrious Listable interface to create lists of titles for our Literature objects.
-         * We add each list to a List of lists called listList. Then we initialist the List literatureList as
-         * an ArrayList and for each list in listList we add all list elements to the List literatureList.
-         *
-         * what's really cool is that the compiler knows that we want to select the addAll function from the list
-         * of functions so that we easily add each list from listList to literatureList a single line of list. I mean
-         *  code.
-         */
+        // lists of instance data for each subclass of Literature, using the Listable functional interface
         listList.add( listable.createLiteratureList( Novel.TITLES, Novel::new ) );
         listList.add( listable.createLiteratureList( ComicBook.TITLES, ComicBook::new ) );
         listList.add( listable.createLiteratureList( Magazine.TITLES, Magazine::new ) );
@@ -87,5 +80,16 @@ public class Main
         System.out.println( "\n\njaysonBookStore average Novel title length:" );
         averageTitleLength = novelStatistics.averageTitleLength();
         System.out.printf( "%.2f letters", averageTitleLength );
+
+        // print the longest book title
+        jaysonBookStore.printLongest();
+
+        // how many books contain "The"
+        numOfBookContaining = jaysonBookStore.howManyBooksContain("The");
+        System.out.println( "\nThere are " + numOfBookContaining + " books containing \"The\"" );
+
+        listOfBooksOfLength = jaysonBookStore.getBooksThisLength(15);
+        System.out.println( "List of Books of length 15" );
+        listOfBooksOfLength.forEach( System.out::println );
     }
 }

@@ -1,8 +1,5 @@
 package ca.bcit.comp2522.lab06;
 
-// Literature is the abstract parent class for all types that
-// will fit into the BookStore
-
 /**
  * The {@code Literature} class is an abstract class that serves as the parent class
  * for all types of literature that will be used in the {@code BookStore}.

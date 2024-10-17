@@ -29,20 +29,19 @@ public class Magazine
      * that may be associated with {@code Magazine} objects. The array includes a variety of
      * well-known publications, ranging from lifestyle to scientific journals.
      */
-    public static final String[] TITLES = { "Time", "National Geographic", "The New Yorker", "Vogue", "Forbes",
-                                            "Sports Illustrated", "Rolling Stone", "Scientific American", "The " +
-                                                    "Atlantic", "Harper's Bazaar", "Wired", "GQ", "Esquire",
-                                            "The " + "Economist", "Newsweek", "Popular Mechanics", "National Review",
-                                            "Vanity Fair", "Nature", "Smithsonian", "People", "Good Housekeeping",
-                                            "Reader's Digest", "Cosmopolitan", "Entertainment Weekly", "Men's Health"
-            , "Women's Health", "Seventeen", "Better Homes & Gardens", "Family Circle", "PC Magazine", "Car and " +
-                                                    "Driver", "Architectural Digest", "Fortune", "Bloomberg " +
-                                                    "Businessweek", "The Nation", "New Scientist", "Mother Jones",
-                                            "Travel + Leisure", "Motor Trend", "Outdoor Life", "Southern Living",
-                                            "Cooking Light", "Food & Wine", "Field & Stream", "Inc.", "Entrepreneur",
-                                            "Golf Digest", "Condé Nast Traveler" };
+    public static final String[] TITLES = {
+            "Time", "National Geographic", "The New Yorker", "Vogue", "Forbes", "Sports Illustrated", "Rolling Stone",
+            "Scientific American", "The Atlantic", "Harper's Bazaar", "Wired", "GQ", "Esquire", "The Economist",
+            "Newsweek", "Popular Mechanics", "National Review", "Vanity Fair", "Nature", "Smithsonian", "People",
+            "Good Housekeeping", "Reader's Digest", "Cosmopolitan", "Entertainment Weekly", "Men's Health",
+            "Women's Health", "Seventeen", "Better Homes & Gardens", "Family Circle", "PC Magazine", "Car and Driver",
+            "Architectural Digest", "Fortune", "Bloomberg Businessweek", "The Nation", "New Scientist", "Mother Jones",
+            "Travel + Leisure", "Motor Trend", "Outdoor Life", "Southern Living", "Cooking Light", "Food & Wine",
+            "Field & Stream", "Inc.", "Entrepreneur", "Golf Digest", "Condé Nast Traveler"
+    };
 
-    private String title;
+
+    private final String title;
 
     /**
      * Constructs a {@code Magazine} object with the specified title.

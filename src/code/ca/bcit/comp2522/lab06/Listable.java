@@ -1,6 +1,5 @@
 package ca.bcit.comp2522.lab06;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -18,7 +17,6 @@ import java.util.function.Function;
  *
  * @param <T> the type of literature that extends {@link Literature}
  *
- *            <p>
  *            Example usage:
  *            <pre>{@code
  *                       Listable<ComicBook> listable = (titles, constructor) -> {
@@ -29,7 +27,6 @@ import java.util.function.Function;
  *                           return comics;
  *                       };
  *                       }</pre>
- *            </p>
  *
  * @author Jayden Hutchinson
  * @author Bryson Lindy

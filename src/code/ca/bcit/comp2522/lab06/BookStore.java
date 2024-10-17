@@ -34,7 +34,6 @@ import java.util.function.Consumer;
  */
 class BookStore< T extends Literature >
 {
-    private static final int FIRST_INDEX = 0;
     private static final int COUNT_ZERO  = 0;
 
     private final String    storeName;
@@ -117,20 +116,26 @@ class BookStore< T extends Literature >
         public double averageTitleLength()
         {
             final int listSize;
-            int[]     totalLength = { FIRST_INDEX };
+            int       totalLength;
+            
+            totalLength = COUNT_ZERO;
 
             listSize = bookList.size();
 
-            bookList.forEach( book ->
-                              {
-                                  if( book instanceof Novel )
-                                  {
-                                      totalLength[FIRST_INDEX] += book.getTitle()
-                                                                      .length();
-                                  }
-                              } );
+            for ( T book : bookList )
+            {
+                if ( book instanceof Novel )
+                {
+                    final int bookTitleLength;
 
-            return totalLength[FIRST_INDEX] / ( double ) listSize;
+                    bookTitleLength = book.getTitle().length();
+
+                    totalLength += bookTitleLength;
+                }
+
+            }
+
+            return totalLength / ( double ) listSize;
         }
     }
 
@@ -273,7 +278,7 @@ class BookStore< T extends Literature >
             }
         }
 
-        System.out.println( "The longest title in the list is:\n" + longestTitle );
+        System.out.println( "\n\nThe longest title in the list is:\n" + longestTitle );
     }
 
     /**
@@ -285,7 +290,7 @@ class BookStore< T extends Literature >
      */
     int howManyBooksContain(final String word)
     {
-        int counter = 0;
+        int counter = COUNT_ZERO;
 
         for( T book : bookList )
         {
