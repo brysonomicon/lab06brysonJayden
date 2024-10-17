@@ -1,7 +1,10 @@
 package ca.bcit.comp2522.lab06;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * The {@code BookStore} class represents a store containing a collection of novels.
@@ -9,16 +12,14 @@ import java.util.List;
  *
  * @author Bryson Lindy
  * @author Jayden Hutchinson
- *
  * @author Richard Ho
  * @author Phyo Thu Kha
- *
  * @version 1.1
  */
-class BookStore<T extends Literature>
+class BookStore< T extends Literature >
 {
-    private final String  storeName;
-    private final List<T> bookList;
+    private final String    storeName;
+    private final List< T > bookList;
 
     /**
      * Constructs a {@code BookStore} with the given store name.
@@ -27,7 +28,7 @@ class BookStore<T extends Literature>
      */
     BookStore(final String storeName)
     {
-        validateName(storeName);
+        validateName( storeName );
 
         this.storeName = storeName;
         this.bookList  = new ArrayList<>();
@@ -40,23 +41,24 @@ class BookStore<T extends Literature>
     {
         final boolean storeNameIsEmpty;
 
-        storeNameIsEmpty = storeName.trim().isEmpty();
+        storeNameIsEmpty = storeName.trim()
+                                    .isEmpty();
 
-        if(storeName == null || storeNameIsEmpty)
+        if( storeName == null || storeNameIsEmpty )
         {
-            throw new IllegalArgumentException("Store name cannot be null or empty");
+            throw new IllegalArgumentException( "Store name cannot be null or empty" );
         }
     }
 
     /**
      * @author Jayden Hutchinson
      * @author Bryson Lindy
-     *
      * @version 1.0
      */
     class BookStoreInfo
     {
         /**
+         *
          */
         public void displayInfo()
         {
@@ -64,41 +66,42 @@ class BookStore<T extends Literature>
 
             bookCount = bookList.size();
 
-            System.out.println(storeName + " has " + bookCount + " books");
+            System.out.println( "\n\nPrint info about BookStore using nested class:" );
+            System.out.println( storeName + " has " + bookCount + " books" );
         }
     }
 
     /**
      * @author Jayden Hutchinson
      * @author Bryson Lindy
-     *
      * @version 1.0
      */
     class NovelStatistics
     {
         /**
-         *
          * @return
          */
         public double averageTitleLength()
         {
             final int listSize;
-            int[]     totalLength = {0};
+            int[]     totalLength = { 0 };
 
             listSize = bookList.size();
 
-            bookList.forEach(book -> {
-                if(book instanceof Novel)
-                {
-                    totalLength[0] += book.getTitle().length();
-                }
-            });
+            bookList.forEach( book ->
+                              {
+                                  if( book instanceof Novel )
+                                  {
+                                      totalLength[0] += book.getTitle()
+                                                            .length();
+                                  }
+                              } );
 
-            return totalLength[0] / (double)listSize;
+            return totalLength[0] / ( double ) listSize;
         }
     }
 
-    List<T> getBookList()
+    List< T > getBookList()
     {
         return this.bookList;
     }
@@ -120,16 +123,16 @@ class BookStore<T extends Literature>
 
     void addItem(final T item)
     {
-        bookList.add(item);
+        bookList.add( item );
     }
 
-    void addNovelsToCollection(final List<? super Novel> novelCollection)
+    void addNovelsToCollection(final List< ? super Novel > novelCollection)
     {
-        for(T book : bookList)
+        for( T book : bookList )
         {
-            if(book instanceof Novel)
+            if( book instanceof Novel )
             {
-                novelCollection.add((Novel)book);
+                novelCollection.add( ( Novel ) book );
             }
         }
     }
@@ -139,7 +142,8 @@ class BookStore<T extends Literature>
      */
     void printItems()
     {
-        bookList.forEach(System.out::println);
+        System.out.println( "Print all items:" );
+        bookList.forEach( System.out::println );
     }
 
     /**
@@ -149,39 +153,48 @@ class BookStore<T extends Literature>
      */
     void printBookTitle(final String title)
     {
-        bookList.forEach(book -> {
-            final String bookTitle;
+        System.out.println( "\n\nPrint all items containing \"" + title + "\":" );
 
-            bookTitle = book.getTitle();
+        bookList.forEach( book ->
+                          {
+                              final String bookTitle;
 
-            if(bookTitle.contains(title))
-            {
-                System.out.println(book);
-            }
-        });
+                              bookTitle = book.getTitle();
+
+                              if( bookTitle.contains( title ) )
+                              {
+                                  System.out.println( book );
+                              }
+                          } );
     }
 
     /**
-     *  TODO use method reference to String::compareToIgnoreCase when sorting
+     * TODO use method reference to String::compareToIgnoreCase when sorting
      */
     void printTitlesInAlphaOrder()
     {
-        final List<String> titles;
+        final List< String >       titles;
+        final Comparator< String > ignoreCaseComparator;
+        final Consumer< String >   print;
 
-        titles = new ArrayList<>();
+        titles               = new ArrayList<>();
+        ignoreCaseComparator = (String::compareToIgnoreCase);
+        print                = (System.out::println);
 
-        for(T book : bookList)
+
+        System.out.println( "\n\nPrint items in alphabetical order:" );
+        for( T book : bookList )
         {
             final String bookTitle;
 
             bookTitle = book.getTitle();
 
-            titles.add(bookTitle);
+            titles.add( bookTitle );
         }
 
-        titles.sort(String::compareToIgnoreCase);
-        //titles.forEach(title -> System.out.println(title));
-        titles.forEach(System.out::println);
+        titles.sort( ignoreCaseComparator );
+        
+        titles.forEach( print );
     }
 
     /**
@@ -192,21 +205,22 @@ class BookStore<T extends Literature>
     {
         String longestTitle;
 
-        longestTitle = this.bookList.getFirst().getTitle();
+        longestTitle = this.bookList.getFirst()
+                                    .getTitle();
 
-        for(T book : bookList)
+        for( T book : bookList )
         {
             final String bookTitle;
 
             bookTitle = book.getTitle();
 
-            if(bookTitle.length() > longestTitle.length())
+            if( bookTitle.length() > longestTitle.length() )
             {
                 longestTitle = bookTitle;
             }
         }
 
-        System.out.println("The longest title in the list is:\n" + longestTitle);
+        System.out.println( "The longest title in the list is:\n" + longestTitle );
     }
 
     /**
@@ -214,19 +228,20 @@ class BookStore<T extends Literature>
      * word passed as a parameter.
      *
      * @param word String to check if contained in each book title
+     *
      * @return number
      */
     int howManyBooksContain(final String word)
     {
         int counter = 0;
 
-        for(T book : bookList)
+        for( T book : bookList )
         {
             final String bookTitle;
 
             bookTitle = book.getTitle();
 
-            if(bookTitle.contains(word))
+            if( bookTitle.contains( word ) )
             {
                 ++counter;
             }
@@ -239,26 +254,27 @@ class BookStore<T extends Literature>
      * Returns a list of novels with titles of the specified length.
      *
      * @param length the desired title length
+     *
      * @return a list of novels with titles of the given length
      */
-    List<Literature> getBooksThisLength(final int length)
+    List< Literature > getBooksThisLength(final int length)
     {
-        final List<Literature> litList;
+        final List< Literature > litList;
 
         litList = new ArrayList<>();
 
-        this.bookList.forEach(book -> {
-            final String bookTitle;
+        this.bookList.forEach( book ->
+                               {
+                                   final String bookTitle;
 
-            bookTitle = book.getTitle();
+                                   bookTitle = book.getTitle();
 
-            if(bookTitle.length() == length)
-            {
-                litList.add(book);
-            }
-        });
+                                   if( bookTitle.length() == length )
+                                   {
+                                       litList.add( book );
+                                   }
+                               } );
 
         return litList;
     }
-
 }
