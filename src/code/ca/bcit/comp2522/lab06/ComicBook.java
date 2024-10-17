@@ -52,10 +52,7 @@ public class ComicBook
      * @return the title of this comic book
      */
     @Override
-    public String getTitle()
-    {
-        return this.title;
-    }
+    public String getTitle() { return this.title; }
 
     /**
      * Returns a string representation of the comic book.

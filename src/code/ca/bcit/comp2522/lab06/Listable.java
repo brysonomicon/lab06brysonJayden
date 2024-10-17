@@ -7,12 +7,11 @@ import java.util.function.Function;
 /**
  * @author Jayden Hutchinson
  * @author Bryson Lindy
- *
  * @version 1.0
  */
 @FunctionalInterface
-public interface Listable <T extends Literature>
+public interface Listable< T extends Literature >
 {
-    List<T> createLiteratureList(final String[] titles, final Function<String, T> constructor);
-
+    List< T > createLiteratureList(final String[] titles,
+                                   final Function< String, T > constructor);
 }

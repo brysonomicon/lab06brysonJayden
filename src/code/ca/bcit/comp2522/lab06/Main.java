@@ -13,14 +13,14 @@ public class Main
 {
     public static void main(String[] args)
     {
-        final BookStore< Literature >   jaysonBookStore;
-        final List< Literature >        literatureList;
-        final List< List >              listList;
-        final List< Novel >             testList;
-        final Listable< Literature >    listable;
-        final BookStore.NovelStatistics novelStatistics;
-        final BookStore.BookStoreInfo   jaysonInfo;
-        final double                    averageTitleLength;
+        final BookStore< Literature >                 jaysonBookStore;
+        final BookStore< Literature >.NovelStatistics novelStatistics;
+        final BookStore< Literature >.BookStoreInfo   jaysonInfo;
+        final List< Literature >                      literatureList;
+        final List< List >                            listList;
+        final List< Novel >                           testList;
+        final Listable< Literature >                  listable;
+        final double                                  averageTitleLength;
 
 
         jaysonBookStore = new BookStore<>( "jayson Book Store: It's Jayden and Bryson, isn't it?" );

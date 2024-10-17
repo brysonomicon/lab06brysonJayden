@@ -21,21 +21,22 @@ public class Novel
                                             "Deliverance", "Dog " + "Soldiers", "Falconer", "The French Lieutenant's "
                                                     + "Woman", "The " + "Golden Notebook",
                                             "Go Tell " + "It on the " + "Mountain", "Gone" + " with " + "the Wind",
-                                            "The Grapes" + " of " + "Wrath", "Gravity's Rainbow", "The " + "Great " +
-                                                    "Gatsby", "A " + "Handful of Dust", "The Heart Is a Lonely " +
-                                                    "Hunter", "The " + "Heart of the Matter", "Herzog", "Housekeeping"
-            , "A" + " House " + "for Mr. " + "Biswas", "I Claudius", "Infinite Jest", "Invisible " + "Man",
-                                            "Light " + "in August", "The Lion The Witch and " + "the" + " " +
-                                                    "Wardrobe", "Lolita", "Lord of the Flies", "The " + "Lord of " +
-                                                    "the" + " " + "Rings", "Loving", "Lucky Jim",
-                                            "The" + " Man Who " + "Loved " + "Children", "Midnight's Children",
-                                            "Money", "The " + "Moviegoer", "Mrs. Dalloway", "Naked Lunch",
-                                            "Native " + "Son", "Neuromancer", "Never Let " + "Me Go", "1984", "On the" +
-                                                    " " + "Road", "One Flew " + "Over " + "the Cuckoo's " + "Nest",
-                                            "The " + "Painted Bird", "Pale " + "Fire", "A Passage " + "to " + "India"
-            , "Play It as It Lays", "Portnoy's Complaint", "Possession", "The Power and" + " the Glory", "The " +
-                                                    "Prime of Miss Jean Brodie", "Rabbit Run", "Ragtime", "The " +
-                                                    "Recognitions", "Red Harvest", "Revolutionary Road", "The " +
+                                            "The Grapes" + " of " + "Wrath", "Gravity's Rainbow",
+                                            "The " + "Great " + "Gatsby", "A " + "Handful of Dust",
+                                            "The Heart Is a " + "Lonely " + "Hunter", "The " + "Heart of the Matter",
+                                            "Herzog", "Housekeeping", "A" + " House " + "for Mr. " + "Biswas",
+                                            "I " + "Claudius", "Infinite Jest", "Invisible " + "Man",
+                                            "Light " + "in" + " August",
+                                            "The Lion " + "The Witch and " + "the" + " " + "Wardrobe", "Lolita",
+                                            "Lord of " + "the Flies", "The " + "Lord of" + " " + "the" + " " + "Rings"
+            , "Loving", "Lucky Jim", "The" + " Man" + " Who " + "Loved " + "Children", "Midnight's Children", "Money"
+            , "The " + "Moviegoer", "Mrs. Dalloway", "Naked Lunch", "Native " + "Son", "Neuromancer", "Never Let " +
+                                                    "Me Go", "1984", "On the" + " " + "Road",
+                                            "One Flew " + "Over " + "the Cuckoo's " + "Nest", "The " + "Painted Bird"
+            , "Pale " + "Fire", "A Passage " + "to " + "India", "Play It as It Lays", "Portnoy's Complaint",
+                                            "Possession", "The Power and" + " the Glory",
+                                            "The " + "Prime of Miss " + "Jean Brodie", "Rabbit Run", "Ragtime", "The "
+                                                    + "Recognitions", "Red Harvest", "Revolutionary Road", "The " +
                                                     "Sheltering Sky", "Slaughterhouse-Five", "Snow " + "Crash",
                                             "The" + " " + "Sot-Weed Factor", "The Sound and the Fury", "The " +
                                                     "Sportswriter", "The Spy Who Came in from the Cold",

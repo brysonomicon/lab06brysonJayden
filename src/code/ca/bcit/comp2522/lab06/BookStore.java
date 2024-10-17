@@ -27,7 +27,6 @@ import java.util.function.Consumer;
  *            </p>
  *
  *            <p>
- *            TODO:
  *            <ul>
  *                <li>Implement lambda expressions for book title matching</li>
  *                <li>Use method reference {@code String::compareToIgnoreCase} for sorting titles</li>
