@@ -26,13 +26,6 @@ import java.util.function.Consumer;
  *            </ul>
  *            </p>
  *
- *            <p>
- *            <ul>
- *                <li>Implement lambda expressions for book title matching</li>
- *                <li>Use method reference {@code String::compareToIgnoreCase} for sorting titles</li>
- *            </ul>
- *            </p>
- *
  * @author Bryson Lindy
  * @author Jayden Hutchinson
  * @author Richard Ho
@@ -42,6 +35,7 @@ import java.util.function.Consumer;
 class BookStore< T extends Literature >
 {
     private static final int FIRST_INDEX = 0;
+    private static final int COUNT_ZERO  = 0;
 
     private final String    storeName;
     private final List< T > bookList;
