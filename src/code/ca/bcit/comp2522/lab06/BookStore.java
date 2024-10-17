@@ -1,14 +1,38 @@
 package ca.bcit.comp2522.lab06;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * The {@code BookStore} class represents a store containing a collection of novels.
- * It provides methods to search, sort, and print information about the novels.
+ * The {@code BookStore} class represents a store containing a collection of literature items, such as novels.
+ * It provides methods to search, sort, and print information about the books in its collection.
+ * This class is generic, accepting any type that extends the {@link Literature} class.
+ *
+ * <p>
+ * The class supports operations such as adding items, displaying information, counting books with specific
+ * characteristics,
+ * and finding books based on title length or keyword.
+ * </p>
+ *
+ * @param <T> the type of literature that extends {@link Literature}
+ *
+ *            <p>
+ *            Nested classes include:
+ *            <ul>
+ *                <li>{@link BookStore.BookStoreInfo} for displaying information about the store</li>
+ *                <li>{@link BookStore.NovelStatistics} for calculating statistics related to novels</li>
+ *            </ul>
+ *            </p>
+ *
+ *            <p>
+ *            TODO:
+ *            <ul>
+ *                <li>Implement lambda expressions for book title matching</li>
+ *                <li>Use method reference {@code String::compareToIgnoreCase} for sorting titles</li>
+ *            </ul>
+ *            </p>
  *
  * @author Bryson Lindy
  * @author Jayden Hutchinson
@@ -18,6 +42,8 @@ import java.util.function.Consumer;
  */
 class BookStore< T extends Literature >
 {
+    private static final int FIRST_INDEX = 0;
+
     private final String    storeName;
     private final List< T > bookList;
 
@@ -25,6 +51,8 @@ class BookStore< T extends Literature >
      * Constructs a {@code BookStore} with the given store name.
      *
      * @param storeName the name of the bookstore
+     *
+     * @throws IllegalArgumentException if the store name is null or empty
      */
     BookStore(final String storeName)
     {
@@ -34,9 +62,13 @@ class BookStore< T extends Literature >
         this.bookList  = new ArrayList<>();
     }
 
-    /*
-    Checks to make sure the store name is not null or empty.
-    */
+    /**
+     * Validates that the store name is not null or empty.
+     *
+     * @param storeName the name of the bookstore
+     *
+     * @throws IllegalArgumentException if the store name is null or empty
+     */
     private static void validateName(final String storeName)
     {
         final boolean storeNameIsEmpty;
@@ -51,6 +83,9 @@ class BookStore< T extends Literature >
     }
 
     /**
+     * The {@code BookStoreInfo} class is a nested class that provides a method to display information
+     * about the bookstore, including the number of books in its collection.
+     *
      * @author Jayden Hutchinson
      * @author Bryson Lindy
      * @version 1.0
@@ -58,7 +93,7 @@ class BookStore< T extends Literature >
     class BookStoreInfo
     {
         /**
-         *
+         * Displays information about the bookstore, including the store name and the number of books.
          */
         public void displayInfo()
         {
@@ -72,6 +107,9 @@ class BookStore< T extends Literature >
     }
 
     /**
+     * The {@code NovelStatistics} class is a nested class that provides a method to calculate
+     * statistics related to the novels in the bookstore, such as the average title length.
+     *
      * @author Jayden Hutchinson
      * @author Bryson Lindy
      * @version 1.0
@@ -79,12 +117,14 @@ class BookStore< T extends Literature >
     class NovelStatistics
     {
         /**
-         * @return
+         * Calculates and returns the average length of the titles of all novels in the bookstore.
+         *
+         * @return the average title length of novels
          */
         public double averageTitleLength()
         {
             final int listSize;
-            int[]     totalLength = { 0 };
+            int[]     totalLength = { FIRST_INDEX };
 
             listSize = bookList.size();
 
@@ -92,20 +132,30 @@ class BookStore< T extends Literature >
                               {
                                   if( book instanceof Novel )
                                   {
-                                      totalLength[0] += book.getTitle()
-                                                            .length();
+                                      totalLength[FIRST_INDEX] += book.getTitle()
+                                                                      .length();
                                   }
                               } );
 
-            return totalLength[0] / ( double ) listSize;
+            return totalLength[FIRST_INDEX] / ( double ) listSize;
         }
     }
 
+    /**
+     * Returns the list of books in the bookstore.
+     *
+     * @return the list of books in the bookstore
+     */
     List< T > getBookList()
     {
         return this.bookList;
     }
 
+    /**
+     * Returns the number of books in the bookstore.
+     *
+     * @return the number of books in the bookstore
+     */
     int getNumOfBooks()
     {
         return this.bookList.size();
@@ -121,11 +171,21 @@ class BookStore< T extends Literature >
         return this.storeName;
     }
 
+    /**
+     * Adds a book to the bookstore collection.
+     *
+     * @param item the book to be added to the collection
+     */
     void addItem(final T item)
     {
         bookList.add( item );
     }
 
+    /**
+     * Adds all novels from the bookstore to a given collection.
+     *
+     * @param novelCollection a collection to which novels will be added
+     */
     void addNovelsToCollection(final List< ? super Novel > novelCollection)
     {
         for( T book : bookList )
@@ -138,7 +198,7 @@ class BookStore< T extends Literature >
     }
 
     /**
-     *
+     * Prints all books in the bookstore.
      */
     void printItems()
     {
@@ -147,9 +207,9 @@ class BookStore< T extends Literature >
     }
 
     /**
-     * TODO use lambda expression to perform title match
-     * bookList.forEach(item -> {}
-     * like a callback function in javascript almost
+     * Prints all books that contain the specified title in their name.
+     *
+     * @param title the title to search for
      */
     void printBookTitle(final String title)
     {
@@ -169,7 +229,8 @@ class BookStore< T extends Literature >
     }
 
     /**
-     * TODO use method reference to String::compareToIgnoreCase when sorting
+     * Prints the titles of all books in alphabetical order.
+     * Uses the {@code String::compareToIgnoreCase} method reference for sorting.
      */
     void printTitlesInAlphaOrder()
     {
@@ -193,13 +254,12 @@ class BookStore< T extends Literature >
         }
 
         titles.sort( ignoreCaseComparator );
-        
+
         titles.forEach( print );
     }
 
     /**
-     * Initializes the longestTitle variable to the first book in the book list.
-     * Iterates through all novels to find the longest title and prints the result.
+     * Prints the longest title in the bookstore's collection.
      */
     public void printLongest()
     {
@@ -224,12 +284,11 @@ class BookStore< T extends Literature >
     }
 
     /**
-     * Increments a counter for each title in the book list that contains the
-     * word passed as a parameter.
+     * Returns the number of books that contain a specified word in their title.
      *
-     * @param word String to check if contained in each book title
+     * @param word the word to search for in the titles
      *
-     * @return number
+     * @return the number of books containing the word
      */
     int howManyBooksContain(final String word)
     {
@@ -251,11 +310,11 @@ class BookStore< T extends Literature >
     }
 
     /**
-     * Returns a list of novels with titles of the specified length.
+     * Returns a list of books with titles of the specified length.
      *
      * @param length the desired title length
      *
-     * @return a list of novels with titles of the given length
+     * @return a list of books with titles of the given length
      */
     List< Literature > getBooksThisLength(final int length)
     {
