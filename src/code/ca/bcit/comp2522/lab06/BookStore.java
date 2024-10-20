@@ -34,7 +34,7 @@ import java.util.function.Consumer;
  */
 class BookStore< T extends Literature >
 {
-    private static final int COUNT_ZERO  = 0;
+    private static final int NONE  = 0;
 
     private final String    storeName;
     private final List< T > bookList;
@@ -118,11 +118,11 @@ class BookStore< T extends Literature >
             final int listSize;
             int       totalLength;
             
-            totalLength = COUNT_ZERO;
+            totalLength = NONE;
 
             listSize = bookList.size();
 
-            for ( T book : bookList )
+            for (final T book : bookList )
             {
                 if ( book instanceof Novel )
                 {
@@ -186,7 +186,7 @@ class BookStore< T extends Literature >
      */
     void addNovelsToCollection(final List< ? super Novel > novelCollection)
     {
-        for( T book : bookList )
+        for(final T book : bookList )
         {
             if( book instanceof Novel )
             {
@@ -242,7 +242,8 @@ class BookStore< T extends Literature >
 
 
         System.out.println( "\n\nPrint items in alphabetical order:" );
-        for( T book : bookList )
+
+        for( final T book : bookList )
         {
             final String bookTitle;
 
@@ -263,22 +264,28 @@ class BookStore< T extends Literature >
     {
         String longestTitle;
 
-        longestTitle = this.bookList.getFirst()
-                                    .getTitle();
+        longestTitle = null;
 
-        for( T book : bookList )
+        for( final T book : bookList )
         {
             final String bookTitle;
 
             bookTitle = book.getTitle();
 
-            if( bookTitle.length() > longestTitle.length() )
+            if( longestTitle == null || bookTitle.length() > longestTitle.length() )
             {
                 longestTitle = bookTitle;
             }
         }
 
-        System.out.println( "\n\nThe longest title in the list is:\n" + longestTitle );
+        if ( longestTitle != null )
+        {
+            System.out.println("\n\nThe longest title in the list is:\n" + longestTitle);
+        }
+        else
+        {
+            System.out.println("\n\nThere are no titles in the list.");
+        }
     }
 
     /**
@@ -290,9 +297,9 @@ class BookStore< T extends Literature >
      */
     int howManyBooksContain(final String word)
     {
-        int counter = COUNT_ZERO;
+        int counter = NONE;
 
-        for( T book : bookList )
+        for( final T book : bookList )
         {
             final String bookTitle;
 
@@ -314,7 +321,7 @@ class BookStore< T extends Literature >
      *
      * @return a list of books with titles of the given length
      */
-    List< Literature > getBooksThisLength(final int length)
+    List< Literature > getBooksThisLength( final int length )
     {
         final List< Literature > litList;
 
