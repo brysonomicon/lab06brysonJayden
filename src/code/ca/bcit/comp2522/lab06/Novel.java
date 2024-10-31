@@ -1,9 +1,5 @@
 package ca.bcit.comp2522.lab06;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-
 /**
  * Represents a novel in the bookstore system, inheriting from the {@link Literature} superclass
  * and implementing the {@link Listable} interface to support listing operations.
@@ -23,7 +19,6 @@ import java.util.function.Function;
  */
 public class Novel
         extends Literature
-        implements Listable< Novel >
 {
 
     /**
@@ -89,31 +84,7 @@ public class Novel
     @Override
     public String toString()
     {
-        return this.getClass()
-                   .getSimpleName() + ": " + this.title;
+        return this.getClass().getSimpleName() + ": " + this.title;
     }
 
-    /**
-     * Creates a list of {@code Novel} objects from the provided array of titles.
-     * This method uses the provided constructor function to generate new {@code Novel} objects.
-     *
-     * @param titles      an array of {@code String} titles to be converted into {@code Novel} objects
-     * @param constructor a {@code Function} that takes a {@code String} and returns a {@code Novel} instance
-     *
-     * @return a {@code List} of {@code Novel} objects, each created from the titles array
-     */
-    @Override
-    public List< Novel > createLiteratureList(final String[] titles,
-                                              final Function< String, Novel > constructor)
-    {
-        final List< Novel > novels;
-
-        novels = new ArrayList<>();
-
-        for( String title : titles )
-        {
-            novels.add( constructor.apply( title ) );
-        }
-        return novels;
-    }
 }

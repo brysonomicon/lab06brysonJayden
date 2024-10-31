@@ -65,7 +65,6 @@ public class ComicBook
     @Override
     public String toString()
     {
-        return this.getClass()
-                   .getSimpleName() + ": " + this.getTitle();
+        return this.getClass().getSimpleName() + ": " + this.getTitle();
     }
 }

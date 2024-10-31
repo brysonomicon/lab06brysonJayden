@@ -9,11 +9,16 @@ import java.util.function.Function;
  * It is parameterized with a type {@code T}, which must extend the {@link Literature} class.
  *
  * <p>
- * This interface uses a functional approach by accepting an array of titles and a {@link Function}
- * that defines how each title should be transformed into a literature item of type {@code T}.
+ * This interface uses a functional approach by accepting an array of titles and a {@link Function}.
+ * It is designed to instance a subclass of {@link Literature} by calling the constructor of the subclass and passing
+ * the title String to it. It returns a List of {@code T extends Literature} containing one Object for every String in
+ * the array that is passed in.
+ * </p>
+ * <p>
  * The interface is annotated with {@code @FunctionalInterface}, meaning it is intended to be used in lambda expressions
  * or method references.
  * </p>
+ *
  *
  * @param <T> the type of literature that extends {@link Literature}
  *
@@ -31,6 +36,10 @@ import java.util.function.Function;
  * @author Jayden Hutchinson
  * @author Bryson Lindy
  * @version 1.0
+ * @see Literature
+ * @see ComicBook
+ * @see Magazine
+ * @see Novel
  */
 @FunctionalInterface
 public interface Listable< T extends Literature >

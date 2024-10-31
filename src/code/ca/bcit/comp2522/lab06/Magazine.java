@@ -74,7 +74,6 @@ public class Magazine
     @Override
     public String toString()
     {
-        return this.getClass()
-                   .getSimpleName() + ": " + title;
+        return this.getClass().getSimpleName() + ": " + title;
     }
 }

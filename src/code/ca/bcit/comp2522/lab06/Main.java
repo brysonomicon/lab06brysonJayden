@@ -13,9 +13,9 @@ public class Main
 {
     public static void main( final String[] args )
     {
-        final BookStore< Literature >                 jaysonBookStore;
         final BookStore< Literature >.NovelStatistics novelStatistics;
-        final BookStore< Literature >.BookStoreInfo   jaysonInfo;
+        final BookStore.BookStoreInfo                 jaysonInfo;
+        final BookStore< Literature >                 jaysonBookStore;
         final List< Literature >                      literatureList;
         final List< List < Literature > >             listList;
         final List< Novel >                           testList;
@@ -37,6 +37,7 @@ public class Main
             {
                 list.add( constructor.apply( title ) );
             }
+
             return list;
         };
 
@@ -53,8 +54,6 @@ public class Main
 
 
         novelStatistics = jaysonBookStore.new NovelStatistics();
-        jaysonInfo      = jaysonBookStore.new BookStoreInfo();
-
 
         jaysonBookStore.printItems();
 
@@ -62,7 +61,8 @@ public class Main
 
         jaysonBookStore.printTitlesInAlphaOrder();
 
-        jaysonInfo.displayInfo();
+        BookStore.BookStoreInfo.displayInfo(jaysonBookStore.getStoreName(),
+                                            jaysonBookStore.getNumOfBooks());
 
         System.out.println( "\n\nAverage length of Novel titles:" );
         System.out.printf( "%.2f letters", novelStatistics.averageTitleLength() );
@@ -81,15 +81,16 @@ public class Main
         numOfBookContaining = jaysonBookStore.howManyBooksContain("The");
         System.out.println( "\nThere are " + numOfBookContaining + " books containing \"The\"" );
 
-        listOfBooksOfLength = jaysonBookStore.getBooksThisLength(15);
         System.out.println( "List of Books of length 15" );
+        listOfBooksOfLength = jaysonBookStore.getBooksThisLength(15);
         listOfBooksOfLength.forEach( System.out::println );
 
         // anonymous inner class to sort by length
         jaysonBookStore.getBookList().sort( new Comparator< Literature >()
         {
             @Override
-            public int compare( Literature book1, Literature book2 )
+            public int compare( final Literature book1,
+                                final Literature book2 )
             {
                 return Integer.compare( book1.getTitle().length(),
                                         book2.getTitle().length() );

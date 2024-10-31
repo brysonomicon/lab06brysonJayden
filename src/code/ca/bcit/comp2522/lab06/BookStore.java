@@ -46,7 +46,7 @@ class BookStore< T extends Literature >
      *
      * @throws IllegalArgumentException if the store name is null or empty
      */
-    BookStore(final String storeName)
+    BookStore( final String storeName )
     {
         validateName( storeName );
 
@@ -61,7 +61,7 @@ class BookStore< T extends Literature >
      *
      * @throws IllegalArgumentException if the store name is null or empty
      */
-    private static void validateName(final String storeName)
+    private static void validateName( final String storeName )
     {
         final boolean storeNameIsEmpty;
 
@@ -82,18 +82,14 @@ class BookStore< T extends Literature >
      * @author Bryson Lindy
      * @version 1.0
      */
-    class BookStoreInfo
+    static class BookStoreInfo
     {
         /**
          * Displays information about the bookstore, including the store name and the number of books.
          */
-        public void displayInfo()
+        public static void displayInfo(final String storeName,
+                                final int bookCount)
         {
-            final int bookCount;
-
-            bookCount = bookList.size();
-
-            System.out.println( "\n\nPrint info about BookStore using nested class:" );
             System.out.println( storeName + " has " + bookCount + " books" );
         }
     }
@@ -119,10 +115,9 @@ class BookStore< T extends Literature >
             int       totalLength;
             
             totalLength = NONE;
+            listSize    = bookList.size();
 
-            listSize = bookList.size();
-
-            for (final T book : bookList )
+            for ( final T book : bookList )
             {
                 if ( book instanceof Novel )
                 {
@@ -130,7 +125,7 @@ class BookStore< T extends Literature >
 
                     bookTitleLength = book.getTitle().length();
 
-                    totalLength += bookTitleLength;
+                    totalLength    += bookTitleLength;
                 }
 
             }
@@ -174,7 +169,7 @@ class BookStore< T extends Literature >
      *
      * @param item the book to be added to the collection
      */
-    void addItem(final T item)
+    void addItem( final T item )
     {
         bookList.add( item );
     }
@@ -184,9 +179,9 @@ class BookStore< T extends Literature >
      *
      * @param novelCollection a collection to which novels will be added
      */
-    void addNovelsToCollection(final List< ? super Novel > novelCollection)
+    void addNovelsToCollection( final List< ? super Novel > novelCollection )
     {
-        for(final T book : bookList )
+        for( final T book : bookList )
         {
             if( book instanceof Novel )
             {
@@ -200,7 +195,6 @@ class BookStore< T extends Literature >
      */
     void printItems()
     {
-        System.out.println( "Print all items:" );
         bookList.forEach( System.out::println );
     }
 
@@ -209,10 +203,8 @@ class BookStore< T extends Literature >
      *
      * @param title the title to search for
      */
-    void printBookTitle(final String title)
+    void printBookTitle( final String title )
     {
-        System.out.println( "\n\nPrint all items containing \"" + title + "\":" );
-
         bookList.forEach( book ->
                           {
                               final String bookTitle;
@@ -223,7 +215,7 @@ class BookStore< T extends Literature >
                               {
                                   System.out.println( book );
                               }
-                          } );
+                          });
     }
 
     /**
@@ -233,15 +225,12 @@ class BookStore< T extends Literature >
     void printTitlesInAlphaOrder()
     {
         final List< String >       titles;
-        final Comparator< String > ignoreCaseComparator;
+        final Comparator< String > stringCompare;
         final Consumer< String >   print;
 
         titles               = new ArrayList<>();
-        ignoreCaseComparator = (String::compareToIgnoreCase);
+        stringCompare        = (String::compareToIgnoreCase);
         print                = (System.out::println);
-
-
-        System.out.println( "\n\nPrint items in alphabetical order:" );
 
         for( final T book : bookList )
         {
@@ -252,7 +241,7 @@ class BookStore< T extends Literature >
             titles.add( bookTitle );
         }
 
-        titles.sort( ignoreCaseComparator );
+        titles.sort( stringCompare );
 
         titles.forEach( print );
     }
@@ -295,7 +284,7 @@ class BookStore< T extends Literature >
      *
      * @return the number of books containing the word
      */
-    int howManyBooksContain(final String word)
+    int howManyBooksContain( final String word )
     {
         int counter = NONE;
 
@@ -307,7 +296,7 @@ class BookStore< T extends Literature >
 
             if( bookTitle.contains( word ) )
             {
-                ++counter;
+                counter++;
             }
         }
 
@@ -337,7 +326,7 @@ class BookStore< T extends Literature >
                                    {
                                        litList.add( book );
                                    }
-                               } );
+                               });
 
         return litList;
     }
